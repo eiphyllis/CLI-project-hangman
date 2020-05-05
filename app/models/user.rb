@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
     has_many :scores
 
     #METHODS#
+    
 end 
