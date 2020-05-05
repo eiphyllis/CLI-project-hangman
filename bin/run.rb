@@ -1,5 +1,4 @@
 require_relative '../config/environment'
-
-# random_word
+# start
 
 puts "HELLO WORLD"
