@@ -1,5 +1,5 @@
 require_relative '../config/environment'
 
-# random_word
+Game.start_game
 
 puts "HELLO WORLD"
