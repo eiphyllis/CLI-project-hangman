@@ -176,11 +176,11 @@ def make_letter_guess
         if $progress_answer == $answer_array 
             #do nothing
         else
-            puts "Good guess!"
+            print "Good guess! "
             move_to_next_round
         end 
     else
-        puts "Sorry, wrong guess :(" 
+        print "Sorry, wrong guess :( " 
         move_to_next_round
     end
 

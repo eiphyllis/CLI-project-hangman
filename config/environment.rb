@@ -9,5 +9,6 @@ require_relative '../app/models/game.rb'
 require_relative '../app/models/score.rb'
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/development.sqlite')
-require_all 'lib'
+ActiveRecord::Base.logger = nil
+# require_all 'lib'
 
