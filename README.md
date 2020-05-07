@@ -2,7 +2,7 @@
 
 CLI Hangman is a Command Line Interface hangman game where a player is given a random word and 10 chances to guess the correct word. 
 
-## Description
+### Description
 
 How to play hangman: https://www.youtube.com/watch?v=cGOeiQfjYPk
 
