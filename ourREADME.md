@@ -3,6 +3,48 @@ a short description,
  a contributors guide 
  and a link to the license for your code.
 
+def start
+        \\__,_|_| |_|\\__, |_| |_| |_|\\_
+        # method that calls everything else
+        puts "Welcome to hangman!" 
+        menu 
+            if category == "New"=> ask_name
+                new_game
+                    random_word
+                    make_board
+                    word_board
+        game_play
+            while !game_over (== answer || guesses == 0)
+                make_letter_guess
+                        elsif check_letter_guess(guess)
+                            if $progress_answer == $answer_array
+                                game_won
+                                        if response == "y"
+                                            new_game
+                            else 
+                                move_to_next_round
+                                    one_less_guess
+                                    word_board
+                            end 
+                        else 
+                            move_to_next_round
+                                one_less_guess
+                                word_board
+                        end
+                        if !game_over
+                        want_word_guess
+                        end 
+            if $progress_answer == $answer_array
+                game_won 
+            else 
+                game_lost #may need reset function in order to work
+                # binding.pry
+            end 
+            menu 
+end 
+
+
+
  # welcome message
 puts "Welcome to hangman!"
 menu # menu

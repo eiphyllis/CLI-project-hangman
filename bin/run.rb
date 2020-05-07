@@ -1,16 +1,16 @@
-#!/usr/bin/env ruby
 require_relative '../config/environment'
-# start
-
-#METHODS#
+# binding.pry
+# METHODS #
 $the_answer = " "
 
 $num_guesses = 10
 $guesses_remaining = 10 
 $answer_array = []
 $progress_answer = []
-    
+$current_game
+$current_user
 $prompt = TTY::Prompt.new
+
 def start
     puts " _    _"
     puts "| |  | |"
@@ -24,36 +24,47 @@ def start
     # method that calls everything else
     puts "Welcome to hangman!" # welcome message
     menu 
-    game_play
+    # puts "See you next time!"
 end
 
 def menu
-    category = $prompt.select("Choose a new game or scoreboard from the menu", %w(New Scoreboard My games Help Quit))
+    category = $prompt.select("Choose a new game or scoreboard from the menu", %w(New Scoreboard Mygames Help Quit))
     if category == "New"
-        ask_name
         new_game
     elsif category == "Scoreboard"
-            # THIS IS UNDEFINED: method for listing top games
+         Score.top_scores # THIS IS UNDEFINED: method for listing top games
+        #  menu?
     elsif category == "My games"
         # THIS IS UNDEFINED: method for listing user's games
     elsif category == "Help"
-        print "instructions" # THIS IS NEEDS TO BE EDITED
+        print "instructions: Hangman is a word guess game.
+         Enter a letter and if it's in the word, the terminal will reveal the corresponding spaces in the word.
+         Between letter guesses, You will have the opportunity to guess the whole word.
+         If you run out of guesses, you lose.
+         " # THIS IS NEEDS TO BE EDITED
     else
         exit
     end
 end
 
-def ask_name
+def new_game
     user_name = $prompt.ask("What is your name?")
-    
+    create_user(user_name)
+    game_play
+    menu
+end
+
+def create_user(user_name)
     if find_user(user_name)
         save_this_game(find_user(user_name))
+        $current_user = find_user(user_name)
     else
         new_user = User.create
         new_user.name = user_name
         new_user.save
         save_this_game(new_user)
-    end 
+        $current_user = new_user
+    end
 end
 
 def find_user(user_name)
@@ -61,22 +72,26 @@ def find_user(user_name)
 end
 
 def save_this_game(this_user)
-    current_game = Game.create
+    new_game = Game.create
     new_score = Score.create
-    new_score.game_id = current_game.id
+    new_score.game_id = new_game.id
+    new_score.save
     new_score.user_id = this_user.id
+    new_score.save
+    new_game.won = false
+    new_game.save
+    $current_game = new_game
 end 
 
-def new_game
+def game_play
+    reset 
+    save_this_game($current_user)
     random_word
     make_board
     word_board
-end
-
-def game_play
+    
     while !game_over
         make_letter_guess
-        
                     # guesses_remaining left to terminal
                     # ask user for a letter guess  
                     # user enters letter guess
@@ -87,10 +102,18 @@ def game_play
                         #if not found, say "nope"
                     # decrement guesses_remaining
     end
+    if $progress_answer == $answer_array
+        game_won 
+    else 
+        game_lost #may need reset function in order to work
+        # binding.pry
+    end 
+    $current_user = nil
+    # exit
 end 
 
 def random_word
-words = ["git", "ruby", "orientation", "class", "instance", "method", "variable", "sql", "flatiron"]
+words = ["orientation", "git", "ruby", "orientation", "class", "instance", "method", "variable", "sql", "flatiron"]
     $the_answer = words.sample
 end
 
@@ -106,24 +129,49 @@ def word_board
 end
 
 def make_letter_guess
-        puts "Enter a letter guess, your hint is ...."
-        guess = gets.chomp
-        if guess == "exit"
-            exit
-        elsif check_letter_guess(guess)
+    puts "Enter a letter guess:"
+    guess = gets.chomp
+    if guess == "exit"
+        exit
+    elsif check_letter_guess(guess)
+        if $progress_answer == $answer_array
+            # game_won
+        else 
             puts "Good guess!"
-        else
-            puts "Sorry, wrong guess :(" 
-        end
-        binding.pry
-
+            move_to_next_round
+        end 
+    else
+        puts "Sorry, wrong guess :(" 
         move_to_next_round
-        want_word_guess
+    end
+if !game_over
+ want_word_guess
+end 
 end
+
+# def make_letter_guess
+#         puts "Enter a letter guess, your hint is ...."
+#         guess = gets.chomp
+#         if guess == "exit"
+#             exit
+#         elsif check_letter_guess(guess)
+#             if $progress_answer == $answer_array
+#                 game_won
+#             else 
+#                 puts "Good guess!"
+#             end 
+#         else
+#             puts "Sorry, wrong guess :(" 
+#         end
+#         # binding.pry
+
+#         move_to_next_round
+#         want_word_guess
+# end
 
 def want_word_guess
     response = $prompt.ask("Do you want to guess the whole word? y/n")
-        if guess == "exit"
+        if response == "exit"
             exit
         elsif response == 'y'
              make_word_guess
@@ -136,7 +184,6 @@ def make_word_guess
         if guess == "exit"
             exit
         elsif check_word_guess(guess)
-            puts "WOW! You got it!"
             game_won
         else
             puts "Survey says? ... No."
@@ -146,10 +193,9 @@ def make_word_guess
 end 
 
 def check_letter_guess(input)
-    $answer_array.each_with_index do |c, index| 
-        if c == input
-            $progress_answer[index] = input
-            return true
+    $progress_answer.each_with_index do |c, index|
+        if $answer_array[index] == input
+          $progress_answer[index] = input
         end
     end
     return false
@@ -182,6 +228,33 @@ def game_over
     end 
 end
 
+def game_lost
+    $current_game.won = false
+    Game.find($current_game.id).update(won: 'false')
+    response = $prompt.ask("Awe too bad, the word was #{$the_answer}. Do you want to play again? y/n")
+    if response == "y"
+        game_play
+    end
+end 
+
+def game_won
+    puts "WOW! You got it!"
+    $current_game.won = true
+    Game.find($current_game.id).update(won: 'true')
+    Score.find($current_game.id).update(score: 10)
+    
+    response = $prompt.ask("Congratulations! You won and guessed #{$the_answer} correctly! Do you want to play again? y/n")
+    if response == "y"
+        game_play
+    end
+end 
+
+def reset
+    $the_answer = " "
+    $guesses_remaining = 10 
+    $answer_array = []
+    $progress_answer = []
+end
 
 start
 
