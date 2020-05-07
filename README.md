@@ -15,11 +15,11 @@ Tell people where they can go to for help. It can be any combination of an issue
 
 ## Roadmap
 
-    ### Things to improve upon:
-        New print statement after each turn to avoid monotony
-        Avoid global variables to run
-        Print a different message when you guess the last letter correctly than if you guessed the whole word
-        Don't allow input greater than a single character for a letter guess
+### Things to improve upon:
+ New print statement after each turn to avoid monotony
+ Avoid global variables to run
+ Print a different message when you guess the last letter correctly than if you guessed the whole word
+ Don't allow input greater than a single character for a letter guess
 
 ## Authors and acknowledgment
 Built by Lauren Birts and Phyllis Njoroge, Flatiron Software Engineering Houston 04202020
