@@ -9,3 +9,5 @@ gem 'rake'
 # gem 'database_cleaner'
 gem 'require_all'
 gem "tty-prompt"
+gem 'json'
+gem 'httparty'

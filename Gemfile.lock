@@ -18,6 +18,7 @@ GEM
     equatable (0.6.1)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    json (2.3.0)
     method_source (1.0.0)
     minitest (5.14.0)
     mustermann (1.1.1)
@@ -66,6 +67,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (~> 5.2)
+  json
   pry
   rake
   require_all
