@@ -27,7 +27,7 @@ Tell people where they can go to for help. It can be any combination of an issue
  - Don't allow input greater than a single character for a letter guess
 
 ## Authors and acknowledgment
-Built by Lauren Birts and Phyllis Njoroge, Flatiron Software Engineering Houston 04202020
+Built by Lauren Birts and Phyllis Njoroge, Flatiron Software Engineering Houston 04/20/2020 Cohort
 
 ### License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
