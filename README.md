@@ -5,7 +5,8 @@ CLI Hangman is a Command Line Interface hangman game where a player is given a r
 ## Description
 
 How to play hangman: https://www.youtube.com/watch?v=cGOeiQfjYPk
-Command Line version of hangman. A player is given a random word at the start of the game and 10 chances to guess the correct letters. The player also has the option to guess the correct word. A player is given 10 points for every word they guess correctly. A player can check out the scoreboard to see tops scores and My games to see how many games they have won and lost.
+
+Command Line version of hangman: A player is given a random word at the start of the game and 10 chances to guess the correct letters. The player also has the option to guess the correct word. A player is given 10 points for every word they guess correctly. A player can check out the scoreboard to see tops scores and My games to see how many games they have won and lost.
 
 ## How to install & play
 
