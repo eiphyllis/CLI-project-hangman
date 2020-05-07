@@ -16,10 +16,10 @@ Tell people where they can go to for help. It can be any combination of an issue
 ## Roadmap
 
 ### Things to improve upon:
- New print statement after each turn to avoid monotony
- Avoid global variables to run
- Print a different message when you guess the last letter correctly than if you guessed the whole word
- Don't allow input greater than a single character for a letter guess
+ - New print statement after each turn to avoid monotony
+ - Avoid global variables to run
+ - Print a different message when you guess the last letter correctly than if you guessed the whole word
+ - Don't allow input greater than a single character for a letter guess
 
 ## Authors and acknowledgment
 Built by Lauren Birts and Phyllis Njoroge, Flatiron Software Engineering Houston 04202020
@@ -27,5 +27,5 @@ Built by Lauren Birts and Phyllis Njoroge, Flatiron Software Engineering Houston
 ### License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-Project Status
-    Last worked on: May 2020
+### Project Status
+ Last worked on: May 2020
