@@ -21,6 +21,7 @@ Authors and acknowledgment
 Built by Lauren Birts and Phyllis Njoroge, Flatiron Software Engineering Houston 04202020
 
 License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 Project Status
     Last worked on: May 2020
