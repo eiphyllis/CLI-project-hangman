@@ -10,7 +10,7 @@ Command Line version of hangman: A player is given a random word at the start of
 
 ## How to install & play
 
-Download or clone the repository. Run 'bundle install' to install the required gems. Run 'ruby bin/rub.rb' to play.
+Download or clone the repository. Run 'bundle install' to install the required gems. Run 'ruby bin/run.rb' to play.
 
 ## Video demo of the game: 
 
