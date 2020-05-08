@@ -14,6 +14,8 @@ Download or clone the repository. Run 'bundle install' to install the required g
 
 ## Video demo of the game: 
 
+https://www.youtube.com/watch?v=1bjs0Mv50yc&feature=youtu.be
+
 ## Support
 
 Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
