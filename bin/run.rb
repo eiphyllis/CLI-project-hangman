@@ -53,14 +53,16 @@ def menu
 end
 
 def new_game
-    user_name = $prompt.ask("What is your name?")
+    name = $prompt.ask("What is your name?")
+    user_name = name.downcase
     create_user(user_name)
     game_play
     menu
 end
 
 def ask_name
-    user_name = $prompt.ask("What is your name?")
+    name = $prompt.ask("What is your name?")
+    user_name = name.downcase
         if find_user(user_name)
             $current_user = find_user(user_name)
         else
